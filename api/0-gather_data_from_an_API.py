@@ -1,34 +1,37 @@
-#!/usr/bin/python3
+import requests
+import sys
 
-"""
-    The `Gather data from an API` module
-"""
+
+def get_todo_progress(employee_id):
+    base_url = "https://jsonplaceholder.typicode.com"
+    todos_url = f"{base_url}/todos"
+    user_url = f"{base_url}/users/{employee_id}"
+
+    try:
+        todos_response = requests.get(
+            todos_url, params={"userId": employee_id})
+        todos = todos_response.json()
+
+        user_response = requests.get(user_url)
+        user_data = user_response.json()
+        username = user_data["name"]
+
+        total = len(todos)
+        completed = sum(1 for todo in todos if todo['completed'])
+
+        print(f"Employee {username} is done with tasks ({completed}/{total}):")
+        for todo in todos:
+            if todo['completed']:
+                print(f"\t{todo['title']}")
+
+    except requests.exceptions.RequestException as e:
+        print("Error:", e)
 
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python3 script_name.py <employee_id>")
+        sys.exit(1)
 
-    import requests
-    from sys import argv
-
-    if len(argv) < 2:
-        exit()
-
-    user_name = requests.get(f"https://jsonplaceholder.\
-typicode.com/users/{argv[1]}").json().get('name')
-
-    todos = requests.get(f"https://jsonplaceholder.typicode.\
-com/todos?userId={argv[1]}").json()
-
-    total = len(todos)
-    completed = 0
-    titles = ""
-    for i in todos:
-        if i['completed']:
-            completed += 1
-            titles += "\t " + i.get('title') + "\n"
-
-    print("Employee {} is done with tasks({}/{}):".format(
-        user_name, completed, total))
-
-    if titles != "":
-        print(titles[:-1])
+    employee_id = int(sys.argv[1])
+    get_todo_progress(employee_id)
