@@ -12,27 +12,24 @@ if __name__ == "__main__":
     if len(argv) < 2:
         exit()
 
-    todo = requests.get("https://jsonplaceholder.typicode.com/todos")
+    todo = requests.get(
+        f"https://jsonplaceholder.typicode.com/todos?userId{argv[1]}"
+        ).json()
+
     user = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
-        )
-    data = todo.json()
-    user_data = user.json()
+        ).json()["name"]
 
     completed = 0
-    completed_task_list = []
-    total = 0
+    titles = ""
+    total = len(todo)
 
-    username = user_data["name"]
-    for todo in data:
-        if todo["userId"] == int(argv[1]):
-            total += 1
-        if todo["userId"] == int(argv[1]) and todo['completed']:
+    for item in todo:
+        if item['completed']:
             completed += 1
-            completed_task_list.append('\t ' + todo['title'])
+            titles += ('\t ' + item['title'] + "\n")
 
     print(
-        f"Employee {username} is done with tasks({completed}/{total}):"
+        f"Employee {user} is done with tasks({completed}/{total}):"
         )
-    for i in completed_task_list:
-        print(i)
+    print(titles)
