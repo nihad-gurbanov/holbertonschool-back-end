@@ -29,7 +29,7 @@ if __name__ == "__main__":
             total += 1
         if todo["userId"] == int(argv[1]) and todo['completed']:
             completed += 1
-            completed_task_list.append('\t' + todo['title'])
+            completed_task_list.append('\t ' + todo['title'])
 
     print(
         f"Employee {username} is done with tasks({completed}/{total}):"
