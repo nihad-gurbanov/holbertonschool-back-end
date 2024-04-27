@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+"""
+    Documentation for API
+"""
 import requests
 import sys
 
