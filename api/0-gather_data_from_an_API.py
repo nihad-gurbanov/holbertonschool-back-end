@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
 """
-    This script retrieves and displays information about a user's
-    completed tasks from the JSONPlaceholder API.
-    Usage: python3 script_name.py user_id
+    The `Gather data from an API` module
 """
 
 
@@ -15,25 +13,22 @@ if __name__ == "__main__":
     if len(argv) < 2:
         exit()
 
-    todo = requests.get(
-        f"https://jsonplaceholder.typicode.com/todos?userId={argv[1]}"
-        ).json()
+    user_name = requests.get(f"https://jsonplaceholder.\
+typicode.com/users/{argv[1]}").json().get('name')
 
-    user = requests.get(
-        f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
-        ).json().get('name')
+    todos = requests.get(f"https://jsonplaceholder.typicode.\
+com/todos?userId={argv[1]}").json()
 
+    total = len(todos)
     completed = 0
     titles = ""
-    total = len(todo)
-
-    for item in todo:
-        if item['completed']:
+    for i in todos:
+        if i['completed']:
             completed += 1
-            titles += '\t ' + item.get('title') + "\n"
+            titles += "\t " + i.get('title') + "\n"
 
-    print(
-        "Employee {} is done with tasks({}/{}):".format(user, completed, total)
-        )
-    if titles:
+    print("Employee {} is done with tasks({}/{}):".format(
+        user_name, completed, total))
+
+    if titles != "":
         print(titles[:-1])
