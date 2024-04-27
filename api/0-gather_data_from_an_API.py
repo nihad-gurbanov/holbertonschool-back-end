@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 """
-This script retrieves and displays information about a user's
-completed tasks from the JSONPlaceholder API.
-Usage: python3 script_name.py user_id
+    This script retrieves and displays information about a user's
+    completed tasks from the JSONPlaceholder API.
+    Usage: python3 script_name.py user_id
 """
 
 import requests
