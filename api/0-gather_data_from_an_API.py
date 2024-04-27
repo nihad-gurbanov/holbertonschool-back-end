@@ -5,7 +5,10 @@
     completed tasks from the JSONPlaceholder API.
     Usage: python3 script_name.py user_id
 """
+
+
 if __name__ == "__main__":
+
     import requests
     from sys import argv
 
@@ -18,7 +21,7 @@ if __name__ == "__main__":
 
     user = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
-        ).json().get("name")
+        ).json().get('name')
 
     completed = 0
     titles = ""
@@ -27,9 +30,10 @@ if __name__ == "__main__":
     for item in todo:
         if item['completed']:
             completed += 1
-            titles += ('\t ' + item['title'] + "\n")
+            titles += '\t ' + item.get('title') + "\n"
 
     print(
-        f"Employee {user} is done with tasks({completed}/{total}):"
+        "Employee {} is done with tasks({}/{}):".format(user, completed, total)
         )
-    print(titles)
+    if titles:
+        print(titles[:-1])
