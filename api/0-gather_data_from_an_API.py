@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     user = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
-        ).json()["name"]
+        ).json().get("name")
 
     completed = 0
     titles = ""
