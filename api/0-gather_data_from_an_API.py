@@ -19,7 +19,7 @@ def get_todo_progress(employee_id):
 
         user_response = requests.get(user_url)
         user_data = user_response.json()
-        username = user_data["name"]
+        username = user_data["username"]
 
         total = len(todos)
         completed = sum(1 for todo in todos if todo['completed'])
