@@ -29,8 +29,9 @@ def gather_user_information():
             completed += 1
             completed_tasks.append(task['title'])
 
-    print("Employee {} is done with tasks({}/{}):".format(
-        employee_name, completed, len(tasks)))
+    print("Employee {} is done with tasks({}/{}):".format(employee_name,
+                                                          completed,
+                                                          len(tasks)))
     for title in completed_tasks:
         print(f"\t {title}")
 
