@@ -13,7 +13,7 @@ if __name__ == "__main__":
         exit()
 
     todo = requests.get(
-        f"https://jsonplaceholder.typicode.com/todos?userId{argv[1]}"
+        f"https://jsonplaceholder.typicode.com/todos?userId={argv[1]}"
         ).json()
 
     user = requests.get(
