@@ -10,8 +10,7 @@ import requests
 from sys import argv
 
 if len(argv) < 2:
-    print("Usage: python3 script_name.py user_id")
-    exit(1)
+    exit()
 
 todo = requests.get("https://jsonplaceholder.typicode.com/todos")
 user = requests.get(f"https://jsonplaceholder.typicode.com/users/{argv[1]}")
