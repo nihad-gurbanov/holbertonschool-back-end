@@ -14,12 +14,14 @@ total_tasks = 0
 
 username = user_data["name"]
 for todo in data:
-  if todo["userId"] == int(argv[1]):
-    total_tasks += 1
-  if todo["userId"] == int(argv[1]) and todo['completed'] == True:
-    completed_task += 1
-    completed_task_list.append('\t' + todo['title'])
+    if todo["userId"] == int(argv[1]):
+        total_tasks += 1
+    if todo["userId"] == int(argv[1]) and todo['completed']:
+        completed_task += 1
+        completed_task_list.append('\t' + todo['title'])
 
-print(f"Employee {username} is done with tasks({completed_task}/{total_tasks}):")
+print(
+    f"Employee {username} is done with tasks({completed_task}/{total_tasks}):"
+    )
 for i in completed_task_list:
-  print(i)
+    print(i)
