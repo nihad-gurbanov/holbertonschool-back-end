@@ -23,7 +23,7 @@ def add_to_csv():
     username = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{argv[1]}"
         ).json().get('username')
-    
+
     row = ''
     for task in todos:
         title = task['title']
@@ -35,6 +35,7 @@ def add_to_csv():
     "Open and write csv file"
     with open(filename, 'w') as csvfile:
         csvfile.write(row)
+
 
 if __name__ == "__main__":
     add_to_csv()
