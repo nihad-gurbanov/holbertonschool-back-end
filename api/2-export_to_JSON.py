@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 
+"""
+    Exports data in JSON format.
+"""
 
 import json
 import requests
 import sys
-
-
-"""
-    Exports data in JSON format.
-"""
 
 
 def export_to_json(employee_id):
